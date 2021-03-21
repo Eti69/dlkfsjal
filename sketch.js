@@ -1,3 +1,36 @@
+
+//string data type 
+var name = "Eti"
+
+//number data type 
+var number = 69
+
+//boolean values 
+var color = true; 
+
+//nothing or empty 
+var happy = null;
+var number = null; 
+
+//undefined 
+var apple; 
+
+//array 
+//zero indexed 
+var fruits = ["banana",apple, 1000, true, null, "orange","chocolate strawberry"]
+
+fruits.push("grapes")
+
+fruits.pop(); 
+console.log(fruits)
+
+//array of arrays 
+var vegetables = [["olive","potato","pepper", "zucchini"],["beans", "bell peppers", "mushrooms"], ["tomato", "onion", "carrot"]]
+//console.log(vegetables[1][1])
+//console.log(vegetables[2][0])
+
+
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,6 +40,8 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
+var gameState="onsling";
+
 
 
 function preload() {
@@ -69,16 +104,20 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if (gameState !== "launched"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState="launched";
+  
 }
 
 function keyPressed(){
     if(keyCode === 32){
-        slingshot.attach(bird.body);
+       // slingshot.attach(bird.body);
     }
 }

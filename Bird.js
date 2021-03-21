@@ -2,6 +2,8 @@ class Bird extends BaseClass {
   constructor(x,y){
     super(x,y,50,50);
     this.image = loadImage("sprites/bird.png");
+    this.cloud=loadImage("sprites/smoke.png");
+    this.trajectory=[]
   }
 
   display() {
@@ -9,5 +11,15 @@ class Bird extends BaseClass {
     //this.body.position.y = mouseY;
 
     super.display();
+    if(this.body.velocity.x > 10 && this.body.position.x > 200){
+      var position = [this.body.position.x, this.body.position.y]; 
+      this.trajectory.push(position)
+    }
+
+   
+    
+    for(var z = 0; z < this.trajectory.length; z++){
+      image(this.cloud,this.trajectory[z][0],this.trajectory[z][1])
+    }
   }
 }
